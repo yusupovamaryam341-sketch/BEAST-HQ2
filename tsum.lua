@@ -1,157 +1,123 @@
--- BEAST HQ OBFUSCATED v2
-local d=function(t)local r={}for i=1,#t do r[i]=string.char(t[i]-3)end return table.concat(r)end
-local P=game:GetService(d({80,108,97,121,101,114,115}))
-local R=game:GetService(d({82,117,110,83,101,114,118,105,99,101}))
-local U=game:GetService(d({85,115,101,114,73,110,112,117,116,83,101,114,118,105,99,101}))
-local L=P.LocalPlayer
-local C=workspace.CurrentCamera
-local role=d({85,83,69,82})
-local active=true
-local conn={}
-local keys={[d({86,73,80,45,76,73,70,69,84,73,77,69,45,65,56,75,52,77})]={exp=d({50,48,51,54,45,48,54,45,50,53}),role=d({86,73,80})},[d({85,83,69,82,45,76,73,70,69,84,73,77,69,45,65,56,75,52,77})]={exp=d({50,48,50,55,45,48,54,45,50,53}),role=d({85,83,69,82})}}
-local function ck(k)if not keys[k]then return false,d({226,157,147})end local t=keys[k]if t.exp~=d({48})then local n=os.date(d({37,89,45,37,109,45,37,100}))if t.exp<n then return false,d({226,157,147})end end return true,d({226,156,133}),t.role end
-local function acc(f)if role==d({86,73,80})then return true end if role==d({85,83,69,82})then local b={d({102,108,121}),d({110,111,99,108,105,112}),d({103,111,100,109,111,100,101})}for _,v in pairs(b)do if v==f then return false end end return true end return false end
-local s={aim=true,esp=true,speed=false,jump=false,spin=false,fly=false,noclip=false,godmode=false,speedVal=16,jumpPower=50,spinSpeed=20,flySpeed=50}
-local tb={}
-local bd={aim=d({70}),esp=d({71}),speed=d({86}),jump=d({74}),spin=d({72}),fly=d({66}),noclip=d({78}),godmode=d({77})}
-local function g()
-local gui=Instance.new(d({83,99,114,101,101,110,71,117,105}))
-gui.Name=d({66,101,97,115,116,72,81})
-gui.Parent=game:GetService(d({67,111,114,101,71,117,105}))
-gui.ResetOnSpawn=false
-local m=Instance.new(d({70,114,97,109,101}))
-m.Size=UDim2.new(0,400,0,460)
-m.Position=UDim2.new(0.5,-200,0.5,-230)
-m.BackgroundColor3=Color3.fromRGB(8,8,8)
-m.BackgroundTransparency=0
-m.Active=true
-m.Draggable=true
-m.Visible=true
-m.Parent=gui
-local c=Instance.new(d({85,73,67,111,114,110,101,114}))
-c.CornerRadius=UDim.new(0,10)
-c.Parent=m
-local t=Instance.new(d({70,114,97,109,101}))
-t.Size=UDim2.new(1,0,0,40)
-t.BackgroundColor3=Color3.fromRGB(15,15,15)
-t.Parent=m
-local tt=Instance.new(d({84,101,120,116,76,97,98,101,108}))
-tt.Size=UDim2.new(0.6,0,1,0)
-tt.Position=UDim2.new(0,10,0,0)
-tt.Text=d({66,69,65,83,84,32,72,81})
-tt.TextColor3=Color3.fromRGB(255,255,255)
-tt.TextScaled=true
-tt.Font=Enum.Font.GothamBold
-tt.TextXAlignment=Enum.TextXAlignment.Left
-tt.BackgroundTransparency=1
-tt.Parent=t
-local cl=Instance.new(d({84,101,120,116,66,117,116,116,111,110}))
-cl.Size=UDim2.new(0,30,0,30)
-cl.Position=UDim2.new(1,-38,0,5)
-cl.Text=d({226,156,149})
-cl.TextColor3=Color3.fromRGB(200,200,200)
-cl.TextScaled=true
-cl.BackgroundColor3=Color3.fromRGB(30,30,30)
-cl.Parent=m
-cl.MouseButton1Click:Connect(function()m.Visible=false end)
-local tabs={d({65,73,77}),d({86,73,83,85,65,76}),d({80,76,65,89,69,82}),d({77,73,83,67})}
-local tbs={}
-local cont=Instance.new(d({70,114,97,109,101}))
-cont.Size=UDim2.new(1,-10,1,-50)
-cont.Position=UDim2.new(0,5,0,45)
-cont.BackgroundTransparency=1
-cont.Parent=m
-local function up(tab)
-for _,v in pairs(cont:GetChildren())do v:Destroy()end
-tb={}
-local y=5
-local function addT(text,key,req)
-local can=(req==nil)or(role==d({86,73,80}))
-local f=Instance.new(d({70,114,97,109,101}))
-f.Size=UDim2.new(1,0,0,30)
-f.Position=UDim2.new(0,0,0,y)
-f.BackgroundColor3=Color3.fromRGB(15,15,15)
-f.BackgroundTransparency=0.3
-f.Parent=cont
-local l=Instance.new(d({84,101,120,116,76,97,98,101,108}))
-l.Size=UDim2.new(0.5,0,1,0)
-l.Position=UDim2.new(0,5,0,0)
-l.Text=can and(text..d({32})..d({91})..bd[key]..d({93}))or(text..d({32})..d({76,79,67,75,69,68}))
-l.TextColor3=can and Color3.fromRGB(200,200,200)or Color3.fromRGB(80,80,80)
-l.TextXAlignment=Enum.TextXAlignment.Left
-l.BackgroundTransparency=1
-l.TextScaled=true
-l.Font=Enum.Font.GothamMedium
-l.Parent=f
-local b=Instance.new(d({84,101,120,116,66,117,116,116,111,110}))
-b.Size=UDim2.new(0,50,0,22)
-b.Position=UDim2.new(0.7,0,0.13,0)
-b.Text=can and(s[key]and d({79,78})or d({79,70,70}))or d({76,79,67,75})
-b.TextColor3=Color3.fromRGB(255,255,255)
-b.TextScaled=true
-b.BackgroundColor3=can and(s[key]and Color3.fromRGB(0,180,60)or Color3.fromRGB(40,40,40))or Color3.fromRGB(20,20,20)
-b.Parent=f
-if can then tb[key]=b b.MouseButton1Click:Connect(function()s[key]=not s[key]b.Text=s[key]and d({79,78})or d({79,70,70})b.BackgroundColor3=s[key]and Color3.fromRGB(0,180,60)or Color3.fromRGB(40,40,40)end)end
-y=y+35 end
-local function addI(text,key,def,req)
-local can=(req==nil)or(role==d({86,73,80}))
-local f=Instance.new(d({70,114,97,109,101}))
-f.Size=UDim2.new(1,0,0,30)
-f.Position=UDim2.new(0,0,0,y)
-f.BackgroundColor3=Color3.fromRGB(15,15,15)
-f.BackgroundTransparency=0.3
-f.Parent=cont
-local l=Instance.new(d({84,101,120,116,76,97,98,101,108}))
-l.Size=UDim2.new(0.5,0,1,0)
-l.Position=UDim2.new(0,5,0,0)
-l.Text=can and text or(text..d({32})..d({76,79,67,75,69,68}))
-l.TextColor3=can and Color3.fromRGB(200,200,200)or Color3.fromRGB(80,80,80)
-l.TextXAlignment=Enum.TextXAlignment.Left
-l.BackgroundTransparency=1
-l.TextScaled=true
-l.Font=Enum.Font.GothamMedium
-l.Parent=f
-local inp=Instance.new(d({84,101,120,116,66,111,120}))
-inp.Size=UDim2.new(0,60,0,22)
-inp.Position=UDim2.new(0.7,0,0.13,0)
-inp.Text=can and tostring(s[key]or def)or d({76,79,67,75})
-inp.TextColor3=can and Color3.fromRGB(255,255,255)or Color3.fromRGB(80,80,80)
-inp.BackgroundColor3=can and Color3.fromRGB(25,25,25)or Color3.fromRGB(15,15,15)
-inp.Parent=f
-if can then inp.FocusLost:Connect(function()local v=tonumber(inp.Text)if v then s[key]=v else inp.Text=tostring(s[key]or def)end end)end
-y=y+35 end
-if tab==d({65,73,77})then addT(d({65,105,109,98,111,116}),d({97,105,109}))
-elseif tab==d({86,73,83,85,65,76})then addT(d({69,83,80}),d({101,115,112}))
-elseif tab==d({80,76,65,89,69,82})then addT(d({83,112,101,101,100}),d({115,112,101,101,100}))addI(d({83,112,101,101,100,32,86,97,108}),d({115,112,101,101,100,86,97,108}),16)addT(d({74,117,109,112}),d({106,117,109,112}))addI(d({74,117,109,112,32,80,111,119}),d({106,117,109,112,80,111,119}),50)addT(d({83,112,105,110}),d({115,112,105,110}))addI(d({83,112,105,110,32,83,112,101,101,100}),d({115,112,105,110,83,112,101,101,100}),20)addT(d({71,111,100,32,77,111,100,101}),d({103,111,100,109,111,100,101}),d({86,73,80}))
-elseif tab==d({77,73,83,67})then addT(d({70,108,121}),d({102,108,121}),d({86,73,80}))addI(d({70,108,121,32,83,112,101,101,100}),d({102,108,121,83,112,101,101,100}),50,d({86,73,80}))addT(d({78,111,99,108,105,112}),d({110,111,99,108,105,112}),d({86,73,80}))local u=Instance.new(d({84,101,120,116,66,117,116,116,111,110}))u.Size=UDim2.new(0.4,0,0,35)u.Position=UDim2.new(0.3,0,0,y+10)u.Text=d({85,78,76,79,65,68})u.TextColor3=Color3.fromRGB(255,255,255)u.TextScaled=trueu.BackgroundColor3=Color3.fromRGB(180,0,40)u.Parent=cont u.MouseButton1Click:Connect(function()active=false for _,c in pairs(conn)do pcall(function()c:Disconnect()end)end gui:Destroy()end)end end
-local function crTab(text,pos)local btn=Instance.new(d({84,101,120,116,66,117,116,116,111,110}))btn.Size=UDim2.new(0.23,0,0,30)btn.Position=UDim2.new(pos,0,0,45)btn.Text=text btn.TextColor3=Color3.fromRGB(180,180,180)btn.TextScaled=truebtn.BackgroundColor3=Color3.fromRGB(15,15,15)btn.Parent=m tbs[text]=btn btn.MouseButton1Click:Connect(function()for _,b in pairs(tbs)do b.BackgroundColor3=Color3.fromRGB(15,15,15)b.TextColor3=Color3.fromRGB(180,180,180)end btn.BackgroundColor3=Color3.fromRGB(255,0,120)btn.TextColor3=Color3.fromRGB(255,255,255)up(text)end)return btn end
-crTab(d({65,73,77}),0.02)crTab(d({86,73,83,85,65,76}),0.27)crTab(d({80,76,65,89,69,82}),0.52)crTab(d({77,73,83,67}),0.77)
-tbs[d({65,73,77})].BackgroundColor3=Color3.fromRGB(255,0,120)
-tbs[d({65,73,77})].TextColor3=Color3.fromRGB(255,255,255)
-up(d({65,73,77}))
-return gui,m end
-local gui,main=g()
-local function getTarget()if not active then return nil end local t=nil local cd=300 local c=Vector2.new(C.ViewportSize.X/2,C.ViewportSize.Y/2)for _,p in pairs(P:GetPlayers())do if p~=L and p.Character and p.Character:FindFirstChild(d({72,101,97,100}))then local h=p.Character.Head local pos,on=E:WorldToViewportPoint(h.Position)if on then local d=(Vector2.new(pos.X,pos.Y)-c).Magnitude if d<cd then cd=d t=p end end end end return t end
-local function gm()if not active or not s.godmode or not acc(d({103,111,100,109,111,100,101}))or not L.Character then return end local h=L.Character:FindFirstChild(d({72,117,109,97,110,111,105,100}))if h then h.Health=100 h.MaxHealth=100 h.BreakJointsOnDeath=false end end
-table.insert(conn,R.RenderStepped:Connect(function()if not active or not s.aim then return end local t=getTarget()if t and t.Character and t.Character:FindFirstChild(d({72,101,97,100}))then local h=t.Character.Head local tp=h.Position local cp=E.CFrame.Position local dir=(tp-cp).Unit local cl=E.CFrame.LookVector local nl=cl:Lerp(dir,0.15)E.CFrame=CFrame.new(cp,cp+nl)end end))
-table.insert(conn,R.Heartbeat:Connect(function()if not active or not L.Character then return end local h=L.Character:FindFirstChild(d({72,117,109,97,110,111,105,100}))if not h then return end if s.speed then h.WalkSpeed=s.speedVal else h.WalkSpeed=16 end if s.jump then h.JumpPower=s.jumpPower else h.JumpPower=50 end end))
-table.insert(conn,R.Heartbeat:Connect(gm))
-table.insert(conn,R.Heartbeat:Connect(function()if not active or not L.Character then return end local h=L.Character:FindFirstChild(d({72,117,109,97,110,111,105,100}))if h then if s.fly and acc(d({102,108,121}))then h.PlatformStand=true h.Sit=false else h.PlatformStand=false end end if s.fly and acc(d({102,108,121}))then local r=L.Character:FindFirstChild(d({72,117,109,97,110,111,105,100,82,111,111,116,80,97,114,116}))if r then local mv=Vector3.new()local f=E.CFrame.LookVector*Vector3.new(1,0,1)local ri=E.CFrame.RightVector*Vector3.new(1,0,1)if U:IsKeyDown(Enum.KeyCode.W)then mv=mv+f end if U:IsKeyDown(Enum.KeyCode.S)then mv=mv-f end if U:IsKeyDown(Enum.KeyCode.A)then mv=mv-ri end if U:IsKeyDown(Enum.KeyCode.D)then mv=mv+ri end if U:IsKeyDown(Enum.KeyCode.Space)then mv=mv+Vector3.new(0,1,0)end if U:IsKeyDown(Enum.KeyCode.LeftShift)then mv=mv+Vector3.new(0,-1,0)end if mv.Magnitude>0 then mv=mv.Unit*s.flySpeed r.Velocity=mv else r.Velocity=Vector3.new(0,0,0)end end end end))
-table.insert(conn,R.Heartbeat:Connect(function()if not active or not s.noclip or not acc(d({110,111,99,108,105,112}))or not L.Character then return end for _,p in pairs(L.Character:GetDescendants())do if p:IsA(d({66,97,115,101,80,97,114,116}))then p.CanCollide=false end end end))
-table.insert(conn,R.RenderStepped:Connect(function()if not active or not s.spin then return end if L.Character and L.Character:FindFirstChild(d({72,117,109,97,110,111,105,100,82,111,111,116,80,97,114,116}))then L.Character.HumanoidRootPart.CFrame=L.Character.HumanoidRootPart.CFrame*CFrame.Angles(0,math.rad(s.spinSpeed),0)end end))
-table.insert(conn,U.InputBegan:Connect(function(i)if not active then return end if i.KeyCode==Enum.KeyCode.Insert then main.Visible=not main.Visible end local key=string.upper(i.KeyCode.Name)local function tg(k)if tb[k]then s[k]=not s[k]tb[k].Text=s[k]and d({79,78})or d({79,70,70})tb[k].BackgroundColor3=s[k]and Color3.fromRGB(0,180,60)or Color3.fromRGB(40,40,40)end end if key==d({70})then tg(d({97,105,109}))
-elseif key==d({71})then tg(d({101,115,112}))
-elseif key==d({86})then tg(d({115,112,101,101,100}))
-elseif key==d({74})then tg(d({106,117,109,112}))
-elseif key==d({72})then tg(d({115,112,105,110}))
-elseif key==d({66})and acc(d({102,108,121}))then tg(d({102,108,121}))
-elseif key==d({78})and acc(d({110,111,99,108,105,112}))then tg(d({110,111,99,108,105,112}))
-elseif key==d({77})and acc(d({103,111,100,109,111,100,101}))then tg(d({103,111,100,109,111,100,101}))
-end end))
-print(d({66,69,65,83,84,32,72,81,32,82,69,65,68,89,33}))
-print(d({73,78,83,69,82,84,32,45,32,84,111,103,103,108,101,32,71,85,73}))
-print(d({70,32,45,32,65,105,109,98,111,116,32,124,32,71,32,45,32,69,83,80,32,124,32,86,32,45,32,83,112,101,101,100}))
-print(d({74,32,45,32,74,117,109,112,32,124,32,72,32,45,32,83,112,105,110,32,124,32,66,32,45,32,70,108,121}))
-print(d({78,32,45,32,78,111,99,108,105,112,32,124,32,77,32,45,32,71,111,100,109,111,100,101}))
+-- BEAST HQ v6.1 - FULL OBFUSCATED
+local function d(t)local r={}for i=1,#t do r[i]=string.char(t[i]-3)end return table.concat(r)end
+local function o()local A=game:GetService(d({80,108,97,121,101,114,115}))local B=game:GetService(d({82,117,110,83,101,114,118,105,99,101}))local C=game:GetService(d({85,115,101,114,73,110,112,117,116,83,101,114,118,105,99,101}))local D=game:GetService(d({84,119,101,101,110,83,101,114,118,105,99,101}))local E=A.LocalPlayer local F=workspace.CurrentCamera local G=game:GetService(d({82,101,112,108,105,99,97,116,101,100,83,116,111,114,97,103,101}))local H=false local I=d({85,83,69,82})local J=true local K={}local L={[d({65,68,77,73,78,83,79,83,75,65,45,50,48,48,48,68,65,89,45,66,56,88,50,77,45,90,76,53,78,49})]={exp=d({50,48,51,54,45,48,54,45,50,53}),role=d({65,68,77,73,78})},[d({86,73,80,45,76,73,70,69,84,73,77,69,45,65,56,75,52,77})]={exp=d({50,48,51,54,45,48,54,45,50,53}),role=d({86,73,80})},[d({85,83,69,82,45,76,73,70,69,84,73,77,69,45,65,56,75,52,77})]={exp=d({50,48,50,55,45,48,54,45,50,53}),role=d({85,83,69,82})},[d({68,69,77,79,45,65,66,67,49,45,50,51,52,53,45,54,55,56,57})]={exp=d({50,48,50,53,45,49,50,45,51,49}),role=d({85,83,69,82})},[d({70,82,69,69,45,48,48,48,48,45,48,48,48,48,45,48,48,48,49})]={exp=d({48}),role=d({85,83,69,82})}}local M=function(N)if not L[N]then return false,d({226,157,147,32,75,101,121,32,110,111,116,32,102,111,117,110,100}),nil end local O=L[N]if O.exp~=d({48})then local P=os.date(d({37,89,45,37,109,45,37,100}))if O.exp<P then return false,d({226,157,147,32,75,101,121,32,101,120,112,105,114,101,100}),nil end end return true,d({226,156,133,32,86,97,108,105,100}),O.role end
+local Q=function(R)if I==d({65,68,77,73,78})then return true end if I==d({86,73,80})then return true end if I==d({85,83,69,82})then local S={d({102,108,121}),d({110,111,99,108,105,112}),d({100,97,109,97,103,101}),d({103,111,100,109,111,100,101})}for _,T in pairs(S)do if T==R then return false end end return true end return false end
+local U={aim=true,esp=true,info=true,speed=false,jump=false,spin=false,fly=false,noclip=false,godmode=false,damage=false,speedVal=16,jumpPower=50,spinSpeed=20,flySpeed=50,damageVal=9999}local V={}local W={aim=d({70}),esp=d({71}),speed=d({86}),jump=d({74}),spin=d({72}),fly=d({66}),noclip=d({78}),godmode=d({77}),damage=d({76})}
+local X=Instance.new(d({83,99,114,101,101,110,71,117,105}))X.Name=d({75,101,121,83,121,115,116,101,109})X.Parent=game:GetService(d({67,111,114,101,71,117,105}))X.ResetOnSpawn=false local Y=Instance.new(d({70,114,97,109,101}))Y.Size=UDim2.new(0,460,0,420)Y.Position=UDim2.new(0.5,-230,0.5,-210)Y.BackgroundColor3=Color3.fromRGB(8,8,8)Y.BackgroundTransparency=0Y.Active=trueY.Draggable=trueY.Parent=X local Z=Instance.new(d({85,73,67,111,114,110,101,114}))Z.CornerRadius=UDim.new(0,12)Z.Parent=Y local aa=Instance.new(d({70,114,97,109,101}))aa.Size=UDim2.new(1,2,1,2)aa.Position=UDim2.new(0,-1,0,-1)aa.BackgroundColor3=Color3.fromRGB(50,50,50)aa.BackgroundTransparency=0aa.Parent=Y local ab=Instance.new(d({85,73,67,111,114,110,101,114}))ab.CornerRadius=UDim.new(0,13)ab.Parent=aa local ac=Instance.new(d({70,114,97,109,101}))ac.Size=UDim2.new(1,0,0,55)ac.BackgroundColor3=Color3.fromRGB(12,12,12)ac.Parent=Y local ad=Instance.new(d({85,73,67,111,114,110,101,114}))ad.CornerRadius=UDim.new(0,0)ad.Parent=ac local ae=Instance.new(d({84,101,120,116,76,97,98,101,108}))ae.Size=UDim2.new(0.5,0,1,0)ae.Position=UDim2.new(0,20,0,0)ae.Text=d({226,154,161,32,66,69,65,83,84,32,72,81})ae.TextColor3=Color3.fromRGB(255,255,255)ae.TextScaled=trueae.Font=Enum.Font.GothamBoldae.TextXAlignment=Enum.TextXAlignment.Leftae.BackgroundTransparency=1ae.Parent=ac local af=Instance.new(d({84,101,120,116,66,117,116,116,111,110}))af.Size=UDim2.new(0,32,0,32)af.Position=UDim2.new(1,-42,0,12)af.Text=d({226,156,149})af.TextColor3=Color3.fromRGB(200,200,200)af.TextScaled=trueaf.BackgroundColor3=Color3.fromRGB(20,20,20)af.Parent=Y local ag=Instance.new(d({85,73,67,111,114,110,101,114}))ag.CornerRadius=UDim.new(0,6)ag.Parent=af af.MouseButton1Click:Connect(function()Y.Visible=false end)
+local ah=Instance.new(d({84,101,120,116,76,97,98,101,108}))ah.Size=UDim2.new(1,-40,0,28)ah.Position=UDim2.new(0,20,0,65)ah.Text=d({226,128,144,32,69,78,84,69,82,32,65,67,84,73,86,65,84,73,79,78,32,75,69,89})ah.TextColor3=Color3.fromRGB(180,180,180)ah.TextScaled=trueah.Font=Enum.Font.GothamBoldah.TextXAlignment=Enum.TextXAlignment.Centerah.BackgroundTransparency=1ah.Parent=Y
+local ai=Instance.new(d({84,101,120,116,66,111,120}))ai.Size=UDim2.new(0.85,0,0,46)ai.Position=UDim2.new(0.075,0,0,105)ai.BackgroundColor3=Color3.fromRGB(15,15,15)ai.TextColor3=Color3.fromRGB(255,255,255)ai.Text=d({})ai.PlaceholderText=d({69,110,116,101,114,32,121,111,117,114,32,107,101,121,46,46,46})ai.Font=Enum.Font.GothamMediumai.TextSize=16ai.Parent=Y local aj=Instance.new(d({85,73,67,111,114,110,101,114}))aj.CornerRadius=UDim.new(0,6)aj.Parent=ai
+local ak=Instance.new(d({84,101,120,116,66,117,116,116,111,110}))ak.Size=UDim2.new(0.35,0,0,46)ak.Position=UDim2.new(0.325,0,0,168)ak.Text=d({226,150,182,32,65,67,84,73,86,65,84,69})ak.TextColor3=Color3.fromRGB(255,255,255)ak.TextScaled=trueak.Font=Enum.Font.GothamBoldak.BackgroundColor3=Color3.fromRGB(30,30,30)ak.Parent=Y local al=Instance.new(d({85,73,67,111,114,110,101,114}))al.CornerRadius=UDim.new(0,6)al.Parent=ak
+local am=Instance.new(d({84,101,120,116,76,97,98,101,108}))am.Size=UDim2.new(1,-40,0,35)am.Position=UDim2.new(0,20,0,230)am.Text=d({226,132,184,32,69,110,116,101,114,32,121,111,117,114,32,107,101,121,32,116,111,32,117,110,108,111,99,107})am.TextColor3=Color3.fromRGB(150,150,150)am.TextScaled=trueam.Font=Enum.Font.GothamMediumam.TextXAlignment=Enum.TextXAlignment.Centeram.BackgroundTransparency=1am.Parent=Y
+local an=Instance.new(d({84,101,120,116,66,117,116,116,111,110}))an.Size=UDim2.new(0.3,0,0,38)an.Position=UDim2.new(0.35,0,0,280)an.Text=d({226,143,182,32,68,73,83,67,79,82,68})an.TextColor3=Color3.fromRGB(255,255,255)an.TextScaled=truean.Font=Enum.Font.GothamBoldan.BackgroundColor3=Color3.fromRGB(88,101,242)an.Parent=Y local ao=Instance.new(d({85,73,67,111,114,110,101,114}))ao.CornerRadius=UDim.new(0,6)ao.Parent=an
+an.MouseButton1Click:Connect(function()if setclipboard then setclipboard(d({104,116,116,112,115,58,47,47,100,105,115,99,111,114,100,46,103,103,47,84,66,110,83,85,118,56,120,117}))am.Text=d({226,156,133,32,76,105,110,107,32,99,111,112,105,101,100,33})am.TextColor3=Color3.fromRGB(0,255,100)task.wait(2)am.Text=d({226,132,184,32,69,110,116,101,114,32,121,111,117,114,32,107,101,121,32,116,111,32,117,110,108,111,99,107})am.TextColor3=Color3.fromRGB(150,150,150)end end)
+local ap=Instance.new(d({84,101,120,116,76,97,98,101,108}))ap.Size=UDim2.new(1,0,0,22)ap.Position=UDim2.new(0,0,0,398)ap.Text=d({194,169,32,66,69,65,83,84,32,72,81})ap.TextColor3=Color3.fromRGB(40,40,40)ap.TextSize=10ap.Font=Enum.Font.GothamMediumap.TextXAlignment=Enum.TextXAlignment.Centerap.BackgroundTransparency=1ap.Parent=Y
+ak.MouseButton1Click:Connect(function()local aq=string.upper(ai.Text:gsub(d({37,115,43}),d({})))if aq==d({})then am.Text=d({226,157,147,32,69,110,116,101,114,32,97,32,107,101,121,33})am.TextColor3=Color3.fromRGB(255,80,80)return end local ar,as,at=M(aq)if ar then am.Text=as..d({32,124,32,240,159,145,145,32,82,111,108,101,58,32})..at am.TextColor3=at==d({65,68,77,73,78})and Color3.fromRGB(255,50,50)or(at==d({86,73,80})and Color3.fromRGB(255,215,0)or Color3.fromRGB(0,255,100))I=at task.wait(0.5)X:Destroy()loadMainScript()else am.Text=as am.TextColor3=Color3.fromRGB(255,80,80)end end)
+ai.FocusLost:Connect(function(au)if au then ak.MouseButton1Click:Fire()end end)
+function loadMainScript()
+print(d({226,154,161,32,66,69,65,83,84,32,72,81,32,65,67,84,73,86,65,84,69,68,33,32,82,111,108,101,58,32})..I)
+if game:GetService(d({67,111,114,101,71,117,105})):FindFirstChild(d({66,101,97,115,116,72,81}))then game:GetService(d({67,111,114,101,71,117,105})):FindFirstChild(d({66,101,97,115,116,72,81})):Destroy()end
+local av=Instance.new(d({83,99,114,101,101,110,71,117,105}))av.Name=d({66,101,97,115,116,72,81})av.Parent=game:GetService(d({67,111,114,101,71,117,105}))av.ResetOnSpawn=false
+local aw=Instance.new(d({70,114,97,109,101}))aw.Size=UDim2.new(0,680,0,520)aw.Position=UDim2.new(0.5,-340,0.5,-260)aw.BackgroundColor3=Color3.fromRGB(8,8,8)aw.BackgroundTransparency=0aw.Active=trueaw.Draggable=trueaw.Visible=trueaw.Parent=av
+local ax=Instance.new(d({85,73,67,111,114,110,101,114}))ax.CornerRadius=UDim.new(0,12)ax.Parent=aw
+local ay=Instance.new(d({70,114,97,109,101}))ay.Size=UDim2.new(1,2,1,2)ay.Position=UDim2.new(0,-1,0,-1)ay.BackgroundColor3=Color3.fromRGB(50,50,50)ay.BackgroundTransparency=0ay.Parent=aw
+local az=Instance.new(d({85,73,67,111,114,110,101,114}))az.CornerRadius=UDim.new(0,13)az.Parent=ay
+local aA=Instance.new(d({70,114,97,109,101}))aA.Size=UDim2.new(1,0,0,55)aA.BackgroundColor3=Color3.fromRGB(12,12,12)aA.Parent=aw
+local aB=Instance.new(d({85,73,67,111,114,110,101,114}))aB.CornerRadius=UDim.new(0,0)aB.Parent=aA
+local aC=Instance.new(d({84,101,120,116,76,97,98,101,108}))aC.Size=UDim2.new(0.3,0,1,0)aC.Position=UDim2.new(0,20,0,0)aC.Text=d({226,154,161,32,66,69,65,83,84,32,72,81})aC.TextColor3=Color3.fromRGB(255,255,255)aC.TextScaled=trueaC.Font=Enum.Font.GothamBoldaC.TextXAlignment=Enum.TextXAlignment.LeftaC.BackgroundTransparency=1aC.Parent=aA
+local aD=Instance.new(d({84,101,120,116,76,97,98,101,108}))aD.Size=UDim2.new(0.3,0,1,0)aD.Position=UDim2.new(0.65,0,0,0)local aE=I==d({65,68,77,73,78})and d({240,159,145,145,32,65,68,77,73,78})or(I==d({86,73,80})and d({240,159,146,142,32,86,73,80})or d({240,159,145,164,32,85,83,69,82}))aD.Text=aE aD.TextColor3=I==d({65,68,77,73,78})and Color3.fromRGB(255,50,50)or(I==d({86,73,80})and Color3.fromRGB(255,215,0)or Color3.fromRGB(150,200,255))aD.TextScaled=trueaD.Font=Enum.Font.GothamBoldaD.TextXAlignment=Enum.TextXAlignment.RightaD.BackgroundTransparency=1aD.Parent=aA
+local aF=Instance.new(d({84,101,120,116,66,117,116,116,111,110}))aF.Size=UDim2.new(0,32,0,32)aF.Position=UDim2.new(1,-42,0,12)aF.Text=d({226,156,149})aF.TextColor3=Color3.fromRGB(200,200,200)aF.TextScaled=trueaF.BackgroundColor3=Color3.fromRGB(20,20,20)aF.Parent=aw
+local aG=Instance.new(d({85,73,67,111,114,110,101,114}))aG.CornerRadius=UDim.new(0,6)aG.Parent=aF
+aF.MouseButton1Click:Connect(function()aw.Visible=false end)
+local aH=Instance.new(d({70,114,97,109,101}))aH.Size=UDim2.new(0,120,0,1)aH.Position=UDim2.new(0,0,0,55)aH.BackgroundColor3=Color3.fromRGB(10,10,10)aH.BackgroundTransparency=0aH.Parent=aw
+local aI=Instance.new(d({70,114,97,109,101}))aI.Size=UDim2.new(1,-130,1,-55)aI.Position=UDim2.new(0,125,0,55)aI.BackgroundTransparency=1aI.Parent=aw
+local aJ=Instance.new(d({83,99,114,111,108,108,105,110,103,70,114,97,109,101}))aJ.Size=UDim2.new(1,0,1,0)aJ.Position=UDim2.new(0,0,0,0)aJ.BackgroundColor3=Color3.fromRGB(8,8,8)aJ.BackgroundTransparency=0aJ.CanvasSize=UDim2.new(0,0,0,0)aJ.ScrollBarThickness=6aJ.ScrollBarImageColor3=Color3.fromRGB(50,50,50)aJ.Parent=aI
+local aK=Instance.new(d({70,114,97,109,101}))aK.Size=UDim2.new(1,0,0,0)aK.BackgroundColor3=Color3.fromRGB(8,8,8)aK.BackgroundTransparency=0aK.Parent=aJ
+local aL={d({240,159,142,175,32,65,73,77}),d({240,159,145,129,32,86,73,83,85,65,76}),d({226,154,161,32,80,76,65,89,69,82}),d({240,159,148,128,32,77,73,83,67}),d({226,132,185,32,73,78,70,79})}local aM={}
+local function aN()J=false for _,aO in pairs(K)do pcall(function()aO:Disconnect()end)end K={}av:Destroy()for _,aP in pairs(game.CoreGui:GetChildren())do if aP.Name==d({66,101,97,115,116,69,83,80})then aP:Destroy()end end print(d({226,154,161,32,66,69,65,83,84,32,72,81,32,85,78,76,79,65,68,69,68}))end
+function aQ(aR)for _,aS in pairs(aK:GetChildren())do aS:Destroy()end V={}local aT=5 local aU=36
+function aV(aW,aX,aY,aZ)local a_=(aZ==nil)or(I==d({65,68,77,73,78}))or(I==d({86,73,80})and aZ~=d({65,68,77,73,78}))local a0=Instance.new(d({70,114,97,109,101}))a0.Size=UDim2.new(1,-15,0,aU)a0.Position=UDim2.new(0,8,0,aX)a0.BackgroundColor3=Color3.fromRGB(14,14,14)a0.BackgroundTransparency=0a0.Parent=aK
+local a1=Instance.new(d({85,73,67,111,114,110,101,114}))a1.CornerRadius=UDim.new(0,6)a1.Parent=a0
+local a2=Instance.new(d({84,101,120,116,76,97,98,101,108}))a2.Size=UDim2.new(0.35,0,1,0)a2.Position=UDim2.new(0,12,0,0)a2.Text=a_ and aW or(aW..d({32,240,159,148,146}))a2.TextColor3=a_ and Color3.fromRGB(220,220,220)or Color3.fromRGB(70,70,70)a2.TextXAlignment=Enum.TextXAlignment.Lefta2.BackgroundTransparency=1a2.TextSize=14a2.Font=Enum.Font.GothamBolda2.Parent=a0
+local a3=Instance.new(d({84,101,120,116,76,97,98,101,108}))a3.Size=UDim2.new(0.15,0,1,0)a3.Position=UDim2.new(0.40,0,0,0)a3.Text=a_ and(d({226,140,168,32})..W[aY])or d({})a3.TextColor3=a_ and Color3.fromRGB(130,130,130)or Color3.fromRGB(70,70,70)a3.TextXAlignment=Enum.TextXAlignment.Centera3.BackgroundTransparency=1a3.TextSize=13a3.Font=Enum.Font.GothamMediuma3.Parent=a0
+local a4=Instance.new(d({84,101,120,116,66,117,116,116,111,110}))a4.Size=UDim2.new(0,65,0,26)a4.Position=UDim2.new(0.75,0,0.14,0)a4.Text=a_ and(U[aY]and d({79,78})or d({79,70,70}))or d({240,159,148,146})a4.TextColor3=Color3.fromRGB(255,255,255)a4.TextSize=13a4.Font=Enum.Font.GothamBolda4.BackgroundColor3=a_ and(U[aY]and Color3.fromRGB(0,160,50)or Color3.fromRGB(35,35,35))or Color3.fromRGB(20,20,20)a4.Parent=a0
+local a5=Instance.new(d({85,73,67,111,114,110,101,114}))a5.CornerRadius=UDim.new(0,4)a5.Parent=a4
+if a_ then V[aY]=a4 a4.MouseButton1Click:Connect(function()U[aY]=not U[aY]a4.Text=U[aY]and d({79,78})or d({79,70,70})a4.BackgroundColor3=U[aY]and Color3.fromRGB(0,160,50)or Color3.fromRGB(35,35,35)end)end end
+function a6(a7,a8,a9,a0_,a1_)local a2_=(a1_==nil)or(I==d({65,68,77,73,78}))or(I==d({86,73,80})and a1_~=d({65,68,77,73,78}))local a3_=Instance.new(d({70,114,97,109,101}))a3_.Size=UDim2.new(1,-15,0,aU)a3_.Position=UDim2.new(0,8,0,a8)a3_.BackgroundColor3=Color3.fromRGB(14,14,14)a3_.BackgroundTransparency=0a3_.Parent=aK
+local a4_=Instance.new(d({85,73,67,111,114,110,101,114}))a4_.CornerRadius=UDim.new(0,6)a4_.Parent=a3_
+local a5_=Instance.new(d({84,101,120,116,76,97,98,101,108}))a5_.Size=UDim2.new(0.35,0,1,0)a5_.Position=UDim2.new(0,12,0,0)a5_.Text=a2_ and a7 or(a7..d({32,240,159,148,146}))a5_.TextColor3=a2_ and Color3.fromRGB(220,220,220)or Color3.fromRGB(70,70,70)a5_.TextXAlignment=Enum.TextXAlignment.Lefta5_.BackgroundTransparency=1a5_.TextSize=14a5_.Font=Enum.Font.GothamBolda5_.Parent=a3_
+local a6_=Instance.new(d({84,101,120,116,66,111,120}))a6_.Size=UDim2.new(0,75,0,26)a6_.Position=UDim2.new(0.75,0,0.14,0)a6_.Text=a2_ and tostring(U[a9]or a0_)or d({240,159,148,146})a6_.TextColor3=a2_ and Color3.fromRGB(255,255,255)or Color3.fromRGB(70,70,70)a6_.TextSize=13a6_.Font=Enum.Font.GothamBolda6_.BackgroundColor3=a2_ and Color3.fromRGB(20,20,20)or Color3.fromRGB(10,10,10)a6_.Parent=a3_
+local a7_=Instance.new(d({85,73,67,111,114,110,101,114}))a7_.CornerRadius=UDim.new(0,4)a7_.Parent=a6_
+if a2_ then a6_.FocusLost:Connect(function()local a8_=tonumber(a6_.Text)if a8_ then U[a9]=a8_ else a6_.Text=tostring(U[a9]or a0_)end end)end end
+if aR==d({240,159,142,175,32,65,73,77})then aV(d({240,159,142,175,32,65,105,109,98,111,116}),aT,d({97,105,105,109}))aT=aT+aU+4 aV(d({240,159,146,128,32,68,97,109,97,103,101}),aT,d({100,97,109,97,103,101}),d({86,73,80}))aT=aT+aU+4 a6(d({226,154,148,32,68,97,109,97,103,101,32,86,97,108,117,101}),aT,d({100,97,109,97,103,101,86,97,108}),9999,d({86,73,80}))
+elseif aR==d({240,159,145,129,32,86,73,83,85,65,76})then aV(d({240,159,145,129,32,69,83,80}),aT,d({101,115,112}))aT=aT+aU+4 aV(d({240,159,147,138,32,73,110,102,111,32,69,83,80}),aT,d({105,110,102,111}))
+elseif aR==d({226,154,161,32,80,76,65,89,69,82})then aV(d({240,159,146,168,32,83,112,101,101,100}),aT,d({115,112,101,101,100}))aT=aT+aU+4 a6(d({240,159,143,131,32,83,112,101,101,100,32,86,97,108,117,101}),aT,d({115,112,101,101,100,86,97,108}),16)aT=aT+aU+4 aV(d({226,172,128,239,184,143,32,74,117,109,112}),aT,d({106,117,109,112}))aT=aT+aU+4 a6(d({240,159,166,152,32,74,117,109,112,32,80,111,119,101,114}),aT,d({106,117,109,112,80,111,119,101,114}),50)aT=aT+aU+4 aV(d({240,159,148,128,32,83,112,105,110}),aT,d({115,112,105,110}))aT=aT+aU+4 a6(d({240,159,148,132,32,83,112,105,110,32,83,112,101,101,100}),aT,d({115,112,105,110,83,112,101,101,100}),20)aT=aT+aU+4 aV(d({240,159,155,161,32,71,111,100,32,77,111,100,101}),aT,d({103,111,100,109,111,100,101}),d({86,73,80}))
+elseif aR==d({240,159,148,128,32,77,73,83,67})then aV(d({226,156,136,32,70,108,121}),aT,d({102,108,121}),d({86,73,80}))aT=aT+aU+4 a6(d({240,159,154,128,32,70,108,121,32,83,112,101,101,100}),aT,d({102,108,121,83,112,101,101,100}),50,d({86,73,80}))aT=aT+aU+4 aV(d({240,159,145,187,32,78,111,99,108,105,112}),aT,d({110,111,99,108,105,112}),d({86,73,80}))aT=aT+aU+4
+local a9_=Instance.new(d({84,101,120,116,66,117,116,116,111,110}))a9_.Size=UDim2.new(0.3,0,0,40)a9_.Position=UDim2.new(0.35,0,0,aT+15)a9_.Text=d({240,159,146,128,32,85,78,76,79,65,68})a9_.TextColor3=Color3.fromRGB(255,255,255)a9_.TextScaled=truea9_.BackgroundColor3=Color3.fromRGB(150,20,20)a9_.Parent=aK
+local a0_=Instance.new(d({85,73,67,111,114,110,101,114}))a0_.CornerRadius=UDim.new(0,6)a0_.Parent=a9_
+a9_.MouseButton1Click:Connect(aN)
+elseif aR==d({226,132,185,32,73,78,70,79})then
+local a1_=Instance.new(d({84,101,120,116,76,97,98,101,108}))a1_.Size=UDim2.new(1,-15,0,35)a1_.Position=UDim2.new(0,8,0,aT)a1_.Text=d({240,159,145,145,32,82,79,76,69,58,32})..I a1_.TextColor3=I==d({65,68,77,73,78})and Color3.fromRGB(255,50,50)or(I==d({86,73,80})and Color3.fromRGB(255,215,0)or Color3.fromRGB(150,200,255))a1_.TextSize=18a1_.Font=Enum.Font.GothamBolda1_.TextXAlignment=Enum.TextXAlignment.Lefta1_.BackgroundTransparency=1a1_.Parent=aK aT=aT+40
+local a2_=Instance.new(d({84,101,120,116,76,97,98,101,108}))a2_.Size=UDim2.new(1,-15,0,28)a2_.Position=UDim2.new(0,8,0,aT)a2_.Text=d({240,159,145,164,32,65,117,116,104,111,114,58,32,89,122,95,52,53,48,95,76,111,118,101})a2_.TextColor3=Color3.fromRGB(200,200,200)a2_.TextSize=14a2_.Font=Enum.Font.GothamMediuma2_.TextXAlignment=Enum.TextXAlignment.Lefta2_.BackgroundTransparency=1a2_.Parent=aK aT=aT+33
+local a3_=Instance.new(d({84,101,120,116,66,117,116,116,111,110}))a3_.Size=UDim2.new(0.3,0,0,40)a3_.Position=UDim2.new(0.05,0,0,aT+10)a3_.Text=d({240,159,147,177,32,84,69,76,69,71,82,65,77})a3_.TextColor3=Color3.fromRGB(255,255,255)a3_.TextScaled=truea3_.BackgroundColor3=Color3.fromRGB(34,153,221)a3_.Parent=aK
+local a4_=Instance.new(d({85,73,67,111,114,110,101,114}))a4_.CornerRadius=UDim.new(0,6)a4_.Parent=a3_
+a3_.MouseButton1Click:Connect(function()if setclipboard then setclipboard(d({104,116,116,112,115,58,47,47,116,46,109,101,47,66,69,65,83,84,95,72,81}))local a5_=aK:FindFirstChild(d({83,116,97,116,117,115,76,97,98,101,108}))if a5_ then a5_.Text=d({226,156,133,32,76,105,110,107,32,99,111,112,105,101,100,33})end end end)
+local a6_=Instance.new(d({84,101,120,116,66,117,116,116,111,110}))a6_.Size=UDim2.new(0.3,0,0,40)a6_.Position=UDim2.new(0.55,0,0,aT+10)a6_.Text=d({240,159,146,172,32,68,73,83,67,79,82,68})a6_.TextColor3=Color3.fromRGB(255,255,255)a6_.TextScaled=truea6_.BackgroundColor3=Color3.fromRGB(88,101,242)a6_.Parent=aK
+local a7_=Instance.new(d({85,73,67,111,114,110,101,114}))a7_.CornerRadius=UDim.new(0,6)a7_.Parent=a6_
+a6_.MouseButton1Click:Connect(function()if setclipboard then setclipboard(d({104,116,116,112,115,58,47,47,100,105,115,99,111,114,100,46,103,103,47,84,66,110,83,85,118,56,120,117}))local a8_=aK:FindFirstChild(d({83,116,97,116,117,115,76,97,98,101,108}))if a8_ then a8_.Text=d({226,156,133,32,76,105,110,107,32,99,111,112,105,101,100,33})end end end)
+aT=aT+55
+local a9_=Instance.new(d({84,101,120,116,76,97,98,101,108}))a9_.Name=d({83,116,97,116,117,115,76,97,98,101,108})a9_.Size=UDim2.new(1,-15,0,28)a9_.Position=UDim2.new(0,8,0,aT+5)a9_.Text=d({226,132,184,32,67,108,105,99,107,32,98,117,116,116,111,110,32,116,111,32,99,111,112,121,32,108,105,110,107})a9_.TextColor3=Color3.fromRGB(150,150,150)a9_.TextSize=13a9_.Font=Enum.Font.GothamMediuma9_.TextXAlignment=Enum.TextXAlignment.Lefta9_.BackgroundTransparency=1a9_.Parent=aK
 end
-pcall(run)
+local a0_=aT+60 aK.Size=UDim2.new(1,0,0,a0_)aJ.CanvasSize=UDim2.new(0,0,0,a0_)end
+local a1_=10 for _,a2_ in pairs(aL)do
+local a3_=Instance.new(d({84,101,120,116,66,117,116,116,111,110}))a3_.Size=UDim2.new(0.85,0,0,36)a3_.Position=UDim2.new(0.075,0,0,a1_)a3_.Text=a2_a3_.TextColor3=Color3.fromRGB(180,180,180)a3_.TextSize=13a3_.Font=Enum.Font.GothamBolda3_.BackgroundColor3=Color3.fromRGB(10,10,10)a3_.Parent=aH
+local a4_=Instance.new(d({85,73,67,111,114,110,101,114}))a4_.CornerRadius=UDim.new(0,6)a4_.Parent=a3_
+aM[a2_]=a3_
+a3_.MouseButton1Click:Connect(function()for _,a5_ in pairs(aM)do a5_.BackgroundColor3=Color3.fromRGB(10,10,10)a5_.TextColor3=Color3.fromRGB(180,180,180)end a3_.BackgroundColor3=Color3.fromRGB(40,40,40)a3_.TextColor3=Color3.fromRGB(255,255,255)aQ(a2_)end)
+a1_=a1_+42 end
+aM[d({240,159,142,175,32,65,73,77})].BackgroundColor3=Color3.fromRGB(40,40,40)aM[d({240,159,142,175,32,65,73,77})].TextColor3=Color3.fromRGB(255,255,255)aQ(d({240,159,142,175,32,65,73,77}))
+local function a6_()for _,a7_ in pairs(G:GetDescendants())do if a7_:IsA(d({82,101,109,111,116,101,69,118,101,110,116}))then local a8_=a7_.FireServer if a8_ then a7_.FireServer=function(a9_,...)if not J then return a8_(a9_,...)end if U[d({100,97,109,97,103,101})]and Q(d({100,97,109,97,103,101}))then local a0_={...}for a1_,a2_ in pairs(a0_)do if type(a2_)==d({110,117,109,98,101,114})and a2_>0 and a2_<10000 then a0_[a1_]=U[d({100,97,109,97,103,101,86,97,108})]end if type(a2_)==d({116,97,98,108,101})then for a3_,a4_ in pairs(a2_)do if type(a4_)==d({110,117,109,98,101,114})and a4_>0 and a4_<10000 then a2_[a3_]=U[d({100,97,109,97,103,101,86,97,108})]end end end end return a8_(a9_,unpack(a0_))end return a8_(a9_,...)end end end end
+pcall(a6_)
+if game:GetService(d({67,111,114,101,71,117,105})):FindFirstChild(d({66,101,97,115,116,69,83,80}))then game:GetService(d({67,111,114,101,71,117,105})):FindFirstChild(d({66,101,97,115,116,69,83,80})):Destroy()end
+local a4_=Instance.new(d({83,99,114,101,101,110,71,117,105}))a4_.Name=d({66,101,97,115,116,69,83,80})a4_.Parent=game:GetService(d({67,111,114,101,71,117,105}))
+local a5_={}
+local function a6__(a7_)if a7_==E then return end local a8_=Instance.new(d({70,114,97,109,101}))a8_.Name=a7_.Name a8_.BackgroundTransparency=1a8_.Size=UDim2.new(0,200,0,35)a8_.Position=UDim2.new(0,0,0,0)a8_.Visible=falsea8_.Parent=a4_
+local a9_=Instance.new(d({84,101,120,116,76,97,98,101,108}))a9_.Name=d({78,97,109,101})a9_.Parent=a8_a9_.BackgroundTransparency=1a9_.Size=UDim2.new(1,0,0.5,0)a9_.Position=UDim2.new(0,0,0,0)a9_.Font=Enum.Font.GothamBolda9_.TextSize=16a9_.TextColor3=Color3.fromRGB(255,215,0)a9_.Text=a7_.Name a9_.TextXAlignment=Enum.TextXAlignment.Center
+local a0_=Instance.new(d({84,101,120,116,76,97,98,101,108}))a0_.Name=d({72,101,97,108,116,104})a0_.Parent=a8_a0_.BackgroundTransparency=1a0_.Size=UDim2.new(1,0,0.5,0)a0_.Position=UDim2.new(0,0,0.5,0)a0_.Font=Enum.Font.Gothama0_.TextSize=13a0_.TextColor3=Color3.fromRGB(0,255,0)a0_.Text=d({49,48,48,47,49,48,48})a0_.TextXAlignment=Enum.TextXAlignment.Center
+a5_[a7_]=a8_end
+for _,a1_ in pairs(A:GetPlayers())do a6__(a1_)end
+A.PlayerAdded:Connect(a6__)
+A.PlayerRemoving:Connect(function(a2_)if a5_[a2_]then a5_[a2_]:Destroy()end a5_[a2_]=nil end)
+local function a3_()if not J then return nil end local a4_=nil local a5_=300 local a6_=Vector2.new(F.ViewportSize.X/2,F.ViewportSize.Y/2)for _,a7_ in pairs(A:GetPlayers())do if a7_~=E and a7_.Character and a7_.Character:FindFirstChild(d({72,101,97,100}))then local a8_=a7_.Character.Head local a9_,a0_=F:WorldToViewportPoint(a8_.Position)if a0_ then local a1_=(Vector2.new(a9_.X,a9_.Y)-a6_).Magnitude if a1_<a5_ then a5_=a1_a4_=a7_end end end end return a4_end
+local a2_=B.RenderStepped:Connect(function()if not J or not U[d({97,105,109})]then return end local a4_=a3_()if a4_ then local a5_=a4_.Character.Head if a5_ then local a6_=a5_.Position local a7_=F.CFrame.Position local a8_=(a6_-a7_).Unit local a9_=F.CFrame.LookVector local a0_=a9_:Lerp(a8_,0.15)F.CFrame=CFrame.new(a7_,a7_+a0_)end end end)
+table.insert(K,a2_)
+local a1_=B.Heartbeat:Connect(function()if not J or not E.Character then return end local a2_=E.Character:FindFirstChild(d({72,117,109,97,110,111,105,100}))if not a2_ then return end if U[d({115,112,101,101,100})]then a2_.WalkSpeed=U[d({115,112,101,101,100,86,97,108})]else a2_.WalkSpeed=16 end if U[d({106,117,109,112})]then a2_.JumpPower=U[d({106,117,109,112,80,111,119,101,114})]else a2_.JumpPower=50 end end)
+table.insert(K,a1_)
+local a3_=B.Heartbeat:Connect(function()if not J or not U[d({103,111,100,109,111,100,101})]or not Q(d({103,111,100,109,111,100,101}))or not E.Character then return end local a4_=E.Character:FindFirstChild(d({72,117,109,97,110,111,105,100}))if a4_ then a4_.Health=100 a4_.MaxHealth=100 a4_.BreakJointsOnDeath=false end end)
+table.insert(K,a3_)
+E.CharacterAdded:Connect(function(a5_)task.wait(0.5)if not J then return end if U[d({103,111,100,109,111,100,101})]and Q(d({103,111,100,109,111,100,101}))then local a6_=a5_:FindFirstChild(d({72,117,109,97,110,111,105,100}))if a6_ then a6_.Health=100 a6_.MaxHealth=100 a6_.BreakJointsOnDeath=false end end end)
+local a7_=B.Heartbeat:Connect(function()if not J or not E.Character then return end local a8_=E.Character:FindFirstChild(d({72,117,109,97,110,111,105,100}))if a8_ then if U[d({102,108,121})]and Q(d({102,108,121}))then a8_.PlatformStand=true a8_.Sit=false else a8_.PlatformStand=false end end if U[d({102,108,121})]and Q(d({102,108,121}))then local a9_=E.Character:FindFirstChild(d({72,117,109,97,110,111,105,100,82,111,111,116,80,97,114,116}))if a9_ then local a0_=Vector3.new()local a1_=F.CFrame.LookVector*Vector3.new(1,0,1)local a2_=F.CFrame.RightVector*Vector3.new(1,0,1)if C:IsKeyDown(Enum.KeyCode.W)then a0_=a0_+a1_end if C:IsKeyDown(Enum.KeyCode.S)then a0_=a0_-a1_end if C:IsKeyDown(Enum.KeyCode.A)then a0_=a0_-a2_end if C:IsKeyDown(Enum.KeyCode.D)then a0_=a0_+a2_end if C:IsKeyDown(Enum.KeyCode.Space)then a0_=a0_+Vector3.new(0,1,0)end if C:IsKeyDown(Enum.KeyCode.LeftShift)then a0_=a0_+Vector3.new(0,-1,0)end if a0_.Magnitude>0 then a0_=a0_.Unit*U[d({102,108,121,83,112,101,101,100})]a9_.Velocity=a0_else a9_.Velocity=Vector3.new(0,0,0)end end end end)
+table.insert(K,a7_)
+local a3_=B.Heartbeat:Connect(function()if not J or not U[d({110,111,99,108,105,112})]or not Q(d({110,111,99,108,105,112}))or not E.Character then return end for _,a4_ in pairs(E.Character:GetDescendants())do if a4_:IsA(d({66,97,115,101,80,97,114,116}))then a4_.CanCollide=false end end end)
+table.insert(K,a3_)
+local a5_=B.RenderStepped:Connect(function()if not J or not U[d({115,112,105,110})]then return end if E.Character and E.Character:FindFirstChild(d({72,117,109,97,110,111,105,100,82,111,111,116,80,97,114,116}))then E.Character.HumanoidRootPart.CFrame=E.Character.HumanoidRootPart.CFrame*CFrame.Angles(0,math.rad(U[d({115,112,105,110,83,112,101,101,100})]),0)end end)
+table.insert(K,a5_)
+local a6_=B.RenderStepped:Connect(function()if not J then for _,a7_ in pairs(a5_)do if a7_ then a7_.Visible=false end end return end if not U[d({101,115,112})]then for _,a8_ in pairs(a5_)do if a8_ then a8_.Visible=false end end return end for a9_,a0_ in pairs(a5_)do if a9_==E then elseif not a9_.Character then a0_.Visible=false else local a1_=a9_.Character:FindFirstChild(d({72,101,97,100}))if not a1_ then a0_.Visible=false else local a2_,a3_=F:WorldToViewportPoint(a1_.Position)if not a3_ then a0_.Visible=false else a0_.Visible=true local a4_=(F.CFrame.Position-a1_.Position).Magnitude local a5_=math.clamp(80/a4_,0.4,1.8)a0_.Position=UDim2.new(0,a2_.X-100*a5_,0,a2_.Y-30*a5_)a0_.Size=UDim2.new(0,200*a5_,0,35*a5_)local a6_=a0_:FindFirstChild(d({78,97,109,101}))if a6_ then a6_.TextSize=math.floor(16*a5_)end if U[d({105,110,102,111})]then local a7_=a0_:FindFirstChild(d({72,101,97,108,116,104}))local a8_=a9_.Character:FindFirstChild(d({72,117,109,97,110,111,105,100}))if a7_ and a8_ then local a9_=math.floor(a8_.Health)local a0_=a8_.MaxHealth or100 a7_.Text=a9_..d({47})..a0_local a1_=a9_/a0_a7_.TextColor3=Color3.fromRGB(255-255*a1_,255*a1_,0)a7_.TextSize=math.floor(13*a5_)end end end end end end end end)
+table.insert(K,a6_)
+local a7_=C.InputBegan:Connect(function(a8_)if not J then return end if a8_.KeyCode==Enum.KeyCode.Insert then aw.Visible=not aw.Visible end local a9_=string.upper(a8_.KeyCode.Name)if a9_==d({70})then U[d({97,105,109})]=not U[d({97,105,109})]if V[d({97,105,109})]then V[d({97,105,109})].Text=U[d({97,105,109})]and d({79,78})or d({79,70,70})V[d({97,105,109})].BackgroundColor3=U[d({97,105,109})]and Color3.fromRGB(0,160,50)or Color3.fromRGB(35,35,35)end
+elseif a9_==d({71})then U[d({101,115,112})]=not U[d({101,115,112})]if V[d({101,115,112})]then V[d({101,115,112})].Text=U[d({101,115,112})]and d({79,78})or d({79,70,70})V[d({101,115,112})].BackgroundColor3=U[d({101,115,112})]and Color3.fromRGB(0,160,50)or Color3.fromRGB(35,35,35)end
+elseif a9_==d({86})then U[d({115,112,101,101,100})]=not U[d({115,112,101,101,100})]if V[d({115,112,101,101,100})]then V[d({115,112,101,101,100})].Text=U[d({115,112,101,101,100})]and d({79,78})or d({79,70,70})V[d({115,112,101,101,100})].BackgroundColor3=U[d({115,112,101,101,100})]and Color3.fromRGB(0,160,50)or Color3.fromRGB(35,35,35)end
+elseif a9_==d({74})then U[d({106,117,109,112})]=not U[d({106,117,109,112})]if V[d({106,117,109,112})]then V[d({106,117,109,112})].Text=U[d({106,117,109,112})]and d({79,78})or d({79,70,70})V[d({106,117,109,112})].BackgroundColor3=U[d({106,117,109,112})]and Color3.fromRGB(0,160,50)or Color3.fromRGB(35,35,35)end
+elseif a9_==d({72})then U[d({115,112,105,110})]=not U[d({115,112,105,110})]if V[d({115,112,105,110})]then V[d({115,112,105,110})].Text=U[d({115,112,105,110})]and d({79,78})or d({79,70,70})V[d({115,112,105,110})].BackgroundColor3=U[d({115,112,105,110})]and Color3.fromRGB(0,160,50)or Color3.fromRGB(35,35,35)end
+elseif a9_==d({66})and Q(d({102,108,121}))then U[d({102,108,121})]=not U[d({102,108,121})]if V[d({102,108,121})]then V[d({102,108,121})].Text=U[d({102,108,121})]and d({79,78})or d({79,70,70})V[d({102,108,121})].BackgroundColor3=U[d({102,108,121})]and Color3.fromRGB(0,160,50)or Color3.fromRGB(35,35,35)end
+elseif a9_==d({78})and Q(d({110,111,99,108,105,112}))then U[d({110,111,99,108,105,112})]=not U[d({110,111,99,108,105,112})]if V[d({110,111,99,108,105,112})]then V[d({110,111,99,108,105,112})].Text=U[d({110,111,99,108,105,112})]and d({79,78})or d({79,70,70})V[d({110,111,99,108,105,112})].BackgroundColor3=U[d({110,111,99,108,105,112})]and Color3.fromRGB(0,160,50)or Color3.fromRGB(35,35,35)end
+elseif a9_==d({77})and Q(d({103,111,100,109,111,100,101}))then U[d({103,111,100,109,111,100,101})]=not U[d({103,111,100,109,111,100,101})]if V[d({103,111,100,109,111,100,101})]then V[d({103,111,100,109,111,100,101})].Text=U[d({103,111,100,109,111,100,101})]and d({79,78})or d({79,70,70})V[d({103,111,100,109,111,100,101})].BackgroundColor3=U[d({103,111,100,109,111,100,101})]and Color3.fromRGB(0,160,50)or Color3.fromRGB(35,35,35)end
+elseif a9_==d({76})and Q(d({100,97,109,97,103,101}))then U[d({100,97,109,97,103,101})]=not U[d({100,97,109,97,103,101})]if V[d({100,97,109,97,103,101})]then V[d({100,97,109,97,103,101})].Text=U[d({100,97,109,97,103,101})]and d({79,78})or d({79,70,70})V[d({100,97,109,97,103,101})].BackgroundColor3=U[d({100,97,109,97,103,101})]and Color3.fromRGB(0,160,50)or Color3.fromRGB(35,35,35)end
+end end)
+table.insert(K,a7_)
+print(d({226,154,161,32,66,69,65,83,84,32,72,81,32,82,69,65,68,89,33,32,82,111,108,101,58,32})..I)
+print(d({226,140,168,239,184,143,32,73,78,83,69,82,84,32,45,32,84,111,103,103,108,101,32,71,85,73}))
+print(d({240,159,142,175,32,70,32,45,32,65,105,109,98,111,116,32,124,32,240,159,145,129,32,71,32,45,32,69,83,80,32,124,32,240,159,146,168,32,86,32,45,32,83,112,101,101,100}))
+print(d({226,172,128,239,184,143,32,74,32,45,32,74,117,109,112,32,124,32,240,159,148,128,32,72,32,45,32,83,112,105,110,32,124,32,226,156,136,32,66,32,45,32,70,108,121}))
+print(d({240,159,145,187,32,78,32,45,32,78,111,99,108,105,112,32,124,32,240,159,155,161,32,77,32,45,32,71,111,100,109,111,100,101,32,124,32,240,159,146,128,32,76,32,45,32,68,97,109,97,103,101}))
+end
+pcall(o)
